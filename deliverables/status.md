@@ -1,4 +1,4 @@
-# Semaine 39
+# Semaine 39 ![Orange flag](../docs/images/flags/orange.svg)
 
 ## Travail réalisé
 
