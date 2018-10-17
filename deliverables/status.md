@@ -1,3 +1,17 @@
+# Semaine 41 ![Orange flag](../docs/images/flags/orange.svg)
+
+## Travail réalisé
+
+Durant la semaine 41, nous avons peaufiné notre vision quant au projet, au diagramme de composants et plus généralement a son architecture. Nous avons également implémenté la base de nos composants afin d'avoir un socle sur lequel développer nos services et le projet. Enfin, une partie de la semaine a été passé sur la compréhension et des essais techniques sur plusieurs outils nous permettant la mise en oeuvre de l'option que nous avons choisi, afin d'en comprendre les possibilités et les limites et de l'implémenter par la suite.
+
+## Travail prévu
+
+Pour la prochaine iteration, nous souhaitons mettre en place le coté client avec une application caduque et limité a une interface très simpliste permettant de communiquer avec le coté serveur et traitement de donnée de notre projet, afin d'avoir toutes les composantes mises en place et pour pouvoir enchainer sur des cas d'utilisations de bout en bout. Nous allons également continuer a développer la partie serveur
+
+## Problèmes rencontrés et risques
+
+Pour cette itération, la difficulté est l'implémentation de la partie d'identification des objets et ce qui est lié plus généralement a l'estimation du volume, avec notamment l'utilisation d'outil que nous connaissons très peu, ce qui nous ralenti dans notre développement
+
 # Semaine 40 ![Green flag](../docs/images/flags/green.svg)
 
 ## Travail réalisé
