@@ -14,6 +14,6 @@ public interface declareREST {
 
     @Path("/routes")
     @POST
-    void declareRoute(@QueryParam("date") Date date, List<Waypoint> waypoints, Volume volume);
+    void declareRoute(@QueryParam("date") Date date, @QueryParam("waypoints") List<Waypoint> waypoints, @QueryParam("volume") Volume volume);
 
 }
