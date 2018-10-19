@@ -10,6 +10,7 @@
     <modules>
         <module>declare-route</module>
         <module>request-relocation</module>
+        <module>commons</module>
     </modules>
     <packaging>pom</packaging>
 
