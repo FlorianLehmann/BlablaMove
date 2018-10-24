@@ -1,3 +1,14 @@
+# Semaine 41 ![Red flag](../docs/images/flags/red.svg)
+
+## Travail réalisé
+
+Durant la semaine 42, nous avons implémenté nos 3 scénarios d'utilisations principaux du coté client. L'application est capable de communiquer avec le serveur afin de lui transmettre les demandes. Le serveur est capable de traiter les requetes entrantes et d'en prendre compte dans une moindre mesure (mise a jour de db, réponse a l'estimation mockée..)
+Nous avons également mis en place Jenkins pour l'aspect intégration continue du projet.
+
+## Travail prévu
+
+Pour la prochaine iteration, nous avons prévu de terminer notre POC, en vérifiant nos 3 scénarios à travers notre application, en partant du client jusqu'a l'estimation et la réservation d'un trajet. L'intégration sera terminée avec la version conceptuelle de notre variante (estimation du volume approximatif).
+
 # Semaine 41 ![Orange flag](../docs/images/flags/orange.svg)
 
 ## Travail réalisé
