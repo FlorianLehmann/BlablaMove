@@ -78,7 +78,7 @@ public class RouteRelocationRegisterTest {
         Date startDate = new Date(11, 11, 2018);
         Date endDate = new Date(11, 11, 2018);
 
-        registryModifier.addRoute(addressArrival, addressDeparture, startDate, endDate, deliverables, user);
+        registryModifier.addRelocation(addressArrival, addressDeparture, startDate, endDate, deliverables, user);
 
         List<Relocation> storedRelocations = findRelocations();
 
@@ -97,7 +97,7 @@ public class RouteRelocationRegisterTest {
         Date startDate = new Date(11, 11, 2018);
         Date endDate = new Date(11, 11, 2018);
 
-        registryModifier.addRoute(addressArrival, addressDeparture, startDate, endDate, deliverables, user);
+        registryModifier.addRelocation(addressArrival, addressDeparture, startDate, endDate, deliverables, user);
 
         List<Relocation> storedRelocations = tracker.getRelocations(user);
 

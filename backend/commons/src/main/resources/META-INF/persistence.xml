@@ -12,6 +12,9 @@
         <class>fr.unice.model.Deliverable</class>
         <class>fr.unice.model.User</class>
         <class>fr.unice.model.Address</class>
+        <class>fr.unice.model.Route</class>
+        <class>fr.unice.model.Volume</class>
+        <class>fr.unice.model.Waypoint</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>

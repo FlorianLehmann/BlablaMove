@@ -29,7 +29,7 @@ public class RequestRelocationRESTImpl implements RequestRelocationREST {
             RelocationRequest relocationRequest = objectMapper.readValue(body, RelocationRequest.class);
             System.out.println(relocationRequest);
 
-            registryModifier.addRoute(relocationRequest.getAddressArrival(),
+            registryModifier.addRelocation(relocationRequest.getAddressArrival(),
                     relocationRequest.getAddressDeparture(),
                     relocationRequest.getStartDate(),
                     relocationRequest.getEndDate(),
@@ -37,7 +37,7 @@ public class RequestRelocationRESTImpl implements RequestRelocationREST {
                     new User("toto"));
 
         } catch (IOException e) {
-            e.printStackTrace();
+            return Response.serverError().build();
         }
 
         return Response.ok().build();

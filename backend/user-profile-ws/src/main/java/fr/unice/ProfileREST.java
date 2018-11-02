@@ -9,4 +9,8 @@ public interface ProfileREST {
     @Path("/relocations")
     @GET
     public Response getRelocations();
+
+    @Path("/routes")
+    @GET
+    public Response getRoutes();
 }
