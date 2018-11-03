@@ -1,14 +1,14 @@
 package fr.unice.model;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Embeddable
 public class Waypoint {
 
+
     private String city;
 
-    public Waypoint(String city) {
+    public Waypoint(String city, Route route) {
         this.city = city;
     }
 

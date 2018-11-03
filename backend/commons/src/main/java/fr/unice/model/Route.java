@@ -1,24 +1,26 @@
 package fr.unice.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 public class Route {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     private Date date;
-    private List<Waypoint> waypoints;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Collection<Waypoint> waypoints = new ArrayList<>();
     private Volume volume;
+
     private User user;
 
-    public Route(Date date, List<Waypoint> waypoints, Volume volume, User user) {
+    public Route(Date date, Collection<Waypoint> waypoints, Volume volume, User user) {
         this.date = date;
         this.waypoints = waypoints;
         this.volume = volume;
@@ -36,11 +38,11 @@ public class Route {
         this.date = date;
     }
 
-    public List<Waypoint> getWaypoints() {
+    public Collection<Waypoint> getWaypoints() {
         return waypoints;
     }
 
-    public void setWaypoints(List<Waypoint> waypoints) {
+    public void setWaypoints(Collection<Waypoint> waypoints) {
         this.waypoints = waypoints;
     }
 

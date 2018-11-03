@@ -20,13 +20,13 @@ public class RouteRelocationRegister implements RegistryModifier, Tracker{
     @Override
     public void addRelocation(Address addressArrival, Address addressDeparture, Date startDate, Date endDate, List<Deliverable> deliverables, User user) {
         Relocation relocation = new Relocation(addressArrival, addressDeparture, startDate, endDate, deliverables, user);
-        entityManager.merge(relocation);
+        entityManager.persist(relocation);
     }
 
     @Override
     public void addRoute(Date date, List<Waypoint> waypoints, Volume volume, User user) {
         Route route = new Route(date, waypoints, volume, user);
-        entityManager.merge(route);
+        entityManager.persist(route);
     }
 
     @Override
