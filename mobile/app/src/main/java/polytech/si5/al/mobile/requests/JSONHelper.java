@@ -3,8 +3,14 @@ package polytech.si5.al.mobile.requests;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
+
+import polytech.si5.al.mobile.business.Relocation;
 
 public class JSONHelper {
 
@@ -24,7 +30,7 @@ public class JSONHelper {
         JSONObject res = new JSONObject();
 
         res.accumulate("date", this.exportCalendarToJSON(departure));
-        res.accumulate("volume", this.exportVolumeToCalendar(volume));
+        res.accumulate("dimension", this.exportVolumeToJSON(volume));
         res.accumulate("waypoints", this.exportWaypointsToJSON(from, to));
 
         return res;
@@ -39,7 +45,7 @@ public class JSONHelper {
         return res;
     }
 
-    private JSONObject exportVolumeToCalendar(int volume) throws JSONException {
+    private JSONObject exportVolumeToJSON(int volume) throws JSONException {
         JSONObject res = new JSONObject();
 
         res.accumulate("height", volume);
@@ -69,5 +75,37 @@ public class JSONHelper {
         res.accumulate("year", arrival.get(Calendar.YEAR));
 
         return res;
+    }
+
+    public List<Relocation> convertRequestFromJSON(String relocationsFromAPI) {
+        List<Relocation> res = new ArrayList<>();
+
+        try {
+            JSONArray request = (JSONArray) new JSONTokener(relocationsFromAPI).nextValue();
+
+            for(int i = 0; i < request.length(); i++){
+                JSONObject current = request.getJSONObject(i);
+
+                res.add(new Relocation(
+                        retrieveLocationFromJSON(current.getJSONObject("addressDeparture")),
+                        retrieveLocationFromJSON(current.getJSONObject("addressArrival")),
+                        5,
+                        retrieveCalendarFromJSON(current.getJSONObject("startDate")),
+                        retrieveCalendarFromJSON(current.getJSONObject("endDate"))
+                ));
+            }
+        } catch (JSONException e) {
+            res.add(new Relocation("Error", "Can't convert JSON request", 400, new GregorianCalendar(), new GregorianCalendar()));
+        }
+        
+        return res;
+    }
+
+    private Calendar retrieveCalendarFromJSON(JSONObject date) throws JSONException {
+        return new GregorianCalendar(date.getInt("year"), date.getInt("month"), date.getInt("day"));
+    }
+
+    private String retrieveLocationFromJSON(JSONObject addressDeparture) throws JSONException {
+        return addressDeparture.getString("city");
     }
 }
