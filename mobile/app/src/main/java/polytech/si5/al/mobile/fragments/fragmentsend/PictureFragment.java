@@ -1,4 +1,4 @@
-package polytech.si5.al.mobile.fragments;
+package polytech.si5.al.mobile.fragments.fragmentsend;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -7,20 +7,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import polytech.si5.al.mobile.R;
+import polytech.si5.al.mobile.fragments.fragmentseek.CallableFragment;
+import polytech.si5.al.mobile.requests.AsyncTaskImage;
+import polytech.si5.al.mobile.requests.JSONHelper;
 
 /**
  * Created by Enzo on 25/10/2018.
  *
  */
 
-public class PictureFragment extends Fragment {
+public class PictureFragment extends Fragment implements CallableFragment {
 
     private List<SinglePictureFragment> fragmentList;
+
+    private TextView volumeText;
 
     public PictureFragment(){
         fragmentList = new ArrayList<>();
@@ -48,6 +54,8 @@ public class PictureFragment extends Fragment {
 
         setupEstimateButton(rootView);
 
+        this.volumeText = rootView.findViewById(R.id.textVolumeEstimation);
+
         return rootView;
     }
 
@@ -56,7 +64,7 @@ public class PictureFragment extends Fragment {
 
         button.setOnClickListener((view) -> {
             if(this.isValidRequest()){
-
+                new AsyncTaskImage(this).execute(this.fragmentList.get(0).getImageBitmap(), this.fragmentList.get(1).getImageBitmap());
             } else {
                 button.setBackgroundColor(getResources().getColor(R.color.wrongParams));
             }
@@ -85,5 +93,11 @@ public class PictureFragment extends Fragment {
         transaction.replace(R.id.fragment_picture_one, singlePictureFragmentOne);
         transaction.replace(R.id.fragment_picture_two, singlePictureFragmentTwo);
         transaction.commit();
+    }
+
+    @Override
+    public void callbackSetter(String rawResult) {
+        this.volumeText.setText("Volume : " + new JSONHelper().getVolumeFromRequest(rawResult));
+        System.out.println(rawResult);
     }
 }

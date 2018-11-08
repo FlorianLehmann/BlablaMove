@@ -7,14 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import polytech.si5.al.mobile.R;
 import polytech.si5.al.mobile.business.Relocation;
 import polytech.si5.al.mobile.holder.RelocationHolder;
 
-public class ListRelocationAdapter extends RecyclerView.Adapter<RelocationHolder> {
+public class ListRelocationAdapter extends RecyclerView.Adapter<RelocationHolder> implements SettableAdapter<Relocation> {
 
     private List<Relocation> relocationList;
 

@@ -1,4 +1,4 @@
-package polytech.si5.al.mobile.fragments;
+package polytech.si5.al.mobile.fragments.fragmentsend;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +9,7 @@ import org.json.JSONException;
 import polytech.si5.al.mobile.R;
 import polytech.si5.al.mobile.requests.JSONHelper;
 
-public class DepatureFragment extends AbstractReservationFragment {
+public class DepatureFragment extends AbstractSendFragment {
 
     private EditText spaceAvailable;
 

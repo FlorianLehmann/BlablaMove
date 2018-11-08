@@ -9,12 +9,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 import polytech.si5.al.mobile.CsteStringApp;
-import polytech.si5.al.mobile.business.Relocation;
-import polytech.si5.al.mobile.fragments.CallableFragment;
+import polytech.si5.al.mobile.fragments.fragmentseek.CallableFragment;
 
 public class AsyncGatherHelper extends AsyncTask<String, Void, String> {
 
@@ -28,19 +25,19 @@ public class AsyncGatherHelper extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         // params comes from the execute() call: params[0] is the url.
         try {
-            return getRelocationsFromAPI();
+            return getFromAPI(params[0]);
         } catch (IOException e) {
             e.printStackTrace();
             return "Unable to retrieve web page. URL may be invalid.";
         }
     }
 
-    private String getRelocationsFromAPI() throws IOException{
+    private String getFromAPI(String extension) throws IOException{
         HttpURLConnection urlConnection = null;
         URL url;
         String res;
         try {
-            url = new URL(CsteStringApp.SERVER_BASE_HTTP + CsteStringApp.SERVER_BASE_ADDRESS + CsteStringApp.SERVER_BASE_EXTENSION + "relocations");
+            url = new URL(CsteStringApp.SERVER_BASE_HTTP + CsteStringApp.SERVER_BASE_ADDRESS + CsteStringApp.SERVER_BASE_EXTENSION + extension);
 
             urlConnection = (HttpURLConnection) url.openConnection();
 
@@ -57,9 +54,7 @@ public class AsyncGatherHelper extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        System.out.println(result);
-
-        callback.callbackSetter(new JSONHelper().convertRequestFromJSON(result));
+        callback.callbackSetter(result);
     }
 
     private String inputStreamToString(InputStream is) {

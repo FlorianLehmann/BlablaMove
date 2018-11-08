@@ -1,4 +1,4 @@
-package polytech.si5.al.mobile.fragments;
+package polytech.si5.al.mobile.fragments.fragmentsend;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import java.util.GregorianCalendar;
 import polytech.si5.al.mobile.R;
 import polytech.si5.al.mobile.requests.AsyncSendHelper;
 
-public abstract class AbstractReservationFragment extends Fragment {
+public abstract class AbstractSendFragment extends Fragment {
 
     protected EditText fromPointText;
     protected EditText toPointText;

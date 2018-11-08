@@ -11,6 +11,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import polytech.si5.al.mobile.business.Relocation;
+import polytech.si5.al.mobile.business.Travel;
 
 public class JSONHelper {
 
@@ -21,7 +22,7 @@ public class JSONHelper {
         res.accumulate("endDate", this.exportCalendarToJSON(arrival));
         res.accumulate("addressDeparture", this.exportAddressToJSON(from));
         res.accumulate("addressArrival", this.exportAddressToJSON(to));
-        res.accumulate("deliverables", this.exportArrayToDeliverables());
+        res.accumulate("dimension", this.exportVolumeToJSON(5));
 
         return res;
     }
@@ -77,11 +78,19 @@ public class JSONHelper {
         return res;
     }
 
-    public List<Relocation> convertRequestFromJSON(String relocationsFromAPI) {
+    private Calendar retrieveCalendarFromJSON(JSONObject date) throws JSONException {
+        return new GregorianCalendar(date.getInt("year"), date.getInt("month"), date.getInt("day"));
+    }
+
+    private String retrieveLocationFromJSON(JSONObject addressDeparture) throws JSONException {
+        return addressDeparture.getString("city");
+    }
+
+    public List<Relocation> convertRelocationsFromJSON(String rawResult) {
         List<Relocation> res = new ArrayList<>();
 
         try {
-            JSONArray request = (JSONArray) new JSONTokener(relocationsFromAPI).nextValue();
+            JSONArray request = (JSONArray) new JSONTokener(rawResult).nextValue();
 
             for(int i = 0; i < request.length(); i++){
                 JSONObject current = request.getJSONObject(i);
@@ -97,15 +106,46 @@ public class JSONHelper {
         } catch (JSONException e) {
             res.add(new Relocation("Error", "Can't convert JSON request", 400, new GregorianCalendar(), new GregorianCalendar()));
         }
-        
+
         return res;
     }
 
-    private Calendar retrieveCalendarFromJSON(JSONObject date) throws JSONException {
-        return new GregorianCalendar(date.getInt("year"), date.getInt("month"), date.getInt("day"));
+    public List<Travel> convertTravelFromJSON(String rawResult) {
+        List<Travel> res = new ArrayList<>();
+
+        try {
+            JSONArray request = (JSONArray) new JSONTokener(rawResult).nextValue();
+
+            for(int i = 0; i < request.length(); i++){
+                JSONObject current = request.getJSONObject(i);
+
+
+
+                res.add(new Travel(
+                        retrieveLocationFromJSON(current.getJSONArray("waypoints").getJSONObject(0)),
+                        retrieveLocationFromJSON(current.getJSONArray("waypoints").getJSONObject(1)),
+                        retrieveVolumeFromJSON(current.getJSONObject("dimension")),
+                        retrieveCalendarFromJSON(current.getJSONObject("date"))
+                ));
+            }
+        } catch (JSONException e) {
+            res.add(new Travel("Error", "Can't convert JSON request", 400, new GregorianCalendar()));
+        }
+
+        return res;
     }
 
-    private String retrieveLocationFromJSON(JSONObject addressDeparture) throws JSONException {
-        return addressDeparture.getString("city");
+    private int retrieveVolumeFromJSON(JSONObject volume) throws JSONException {
+        return volume.getInt("depth") * volume.getInt("height") * volume.getInt("width");
+    }
+
+    public String getVolumeFromRequest(String rawResult) {
+        try {
+            JSONObject request = ((JSONObject) new JSONTokener(rawResult).nextValue()).getJSONObject("estimation");
+
+            return request.getString("volume") + " " + request.getString("unit") + "3";
+        } catch (JSONException e) {
+            return "Couldn't retrieve the volume";
+        }
     }
 }

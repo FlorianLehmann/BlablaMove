@@ -1,4 +1,4 @@
-package polytech.si5.al.mobile.fragments;
+package polytech.si5.al.mobile.fragments.fragmentsend;
 
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +17,7 @@ import polytech.si5.al.mobile.requests.JSONHelper;
  *
  */
 
-public class RelocationFragment extends AbstractReservationFragment {
+public class RelocationFragment extends AbstractSendFragment {
 
     private Calendar arrivalCalendar;
 

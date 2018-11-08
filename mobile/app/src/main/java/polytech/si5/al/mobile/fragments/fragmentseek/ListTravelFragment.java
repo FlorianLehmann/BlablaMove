@@ -1,4 +1,4 @@
-package polytech.si5.al.mobile.fragments;
+package polytech.si5.al.mobile.fragments.fragmentseek;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -9,24 +9,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
-
 import polytech.si5.al.mobile.R;
-import polytech.si5.al.mobile.adapter.ListRelocationAdapter;
-import polytech.si5.al.mobile.business.Relocation;
+import polytech.si5.al.mobile.adapter.ListTravelAdapter;
 import polytech.si5.al.mobile.requests.AsyncGatherHelper;
+import polytech.si5.al.mobile.requests.JSONHelper;
 
-public class ListRelocationFragment extends Fragment implements CallableFragment{
+public class ListTravelFragment extends Fragment implements CallableFragment {
 
-    private ListRelocationAdapter adapter;
+    private ListTravelAdapter adapter;
 
     private SwipeRefreshLayout refreshLayout;
 
-    public ListRelocationFragment(){
+    public ListTravelFragment(){
+
     }
 
-    public static ListRelocationFragment newInstance(){
-        ListRelocationFragment fragment = new ListRelocationFragment();
+    public static ListTravelFragment newInstance(){
+        ListTravelFragment fragment = new ListTravelFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -46,26 +45,28 @@ public class ListRelocationFragment extends Fragment implements CallableFragment
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapter = new ListRelocationAdapter();
+        adapter = new ListTravelAdapter();
 
-        new AsyncGatherHelper(this).execute("");
+        executeRequest();
 
         recyclerView.setAdapter(adapter);
 
         refreshLayout = rootView.findViewById(R.id.swipe_container);
 
-        refreshLayout.setOnRefreshListener(() -> {
-            new AsyncGatherHelper(this).execute("");
-        });
+        refreshLayout.setOnRefreshListener(this::executeRequest);
 
         return rootView;
     }
 
+    private void executeRequest(){
+        new AsyncGatherHelper(this).execute("routes");
+    }
+
     @Override
-    public void callbackSetter(List<Relocation> relocationList) {
+    public void callbackSetter(String rawResult) {
         adapter.clear();
 
-        adapter.addAll(relocationList);
+        adapter.addAll(new JSONHelper().convertTravelFromJSON(rawResult));
 
         refreshLayout.setRefreshing(false);
     }

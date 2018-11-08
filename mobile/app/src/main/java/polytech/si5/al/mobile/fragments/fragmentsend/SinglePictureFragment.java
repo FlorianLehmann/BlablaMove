@@ -1,4 +1,4 @@
-package polytech.si5.al.mobile.fragments;
+package polytech.si5.al.mobile.fragments.fragmentsend;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -23,6 +23,8 @@ import static android.app.Activity.RESULT_OK;
 public class SinglePictureFragment extends Fragment {
 
     private ImageView imageView;
+
+    private Bitmap imageBitmap;
 
     public SinglePictureFragment(){
 
@@ -66,12 +68,16 @@ public class SinglePictureFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            imageBitmap = (Bitmap) extras.get("data");
             imageView.setImageBitmap(imageBitmap);
         }
     }
 
     public boolean containsImage() {
-        return true;
+        return imageBitmap != null;
+    }
+
+    public Bitmap getImageBitmap() {
+        return imageBitmap;
     }
 }
