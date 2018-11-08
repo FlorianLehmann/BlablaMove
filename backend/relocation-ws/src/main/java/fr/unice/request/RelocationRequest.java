@@ -3,6 +3,7 @@ package fr.unice.request;
 import fr.unice.model.Address;
 import fr.unice.model.Date;
 import fr.unice.model.Deliverable;
+import fr.unice.model.Dimension;
 
 import java.util.List;
 
@@ -12,15 +13,15 @@ public class RelocationRequest {
     private Address addressDeparture;
     private Date startDate;
     private Date endDate;
-    private List<Deliverable> deliverables;
+    private Dimension dimension;
 
 
-    public RelocationRequest(Address addressArrival, Address addressDeparture, Date startDate, Date endDate, List<Deliverable> deliverables) {
+    public RelocationRequest(Address addressArrival, Address addressDeparture, Date startDate, Date endDate, Dimension dimension) {
         this.addressArrival = addressArrival;
         this.addressDeparture = addressDeparture;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.deliverables = deliverables;
+        this.dimension = dimension;
     }
 
     public RelocationRequest() {
@@ -58,22 +59,12 @@ public class RelocationRequest {
         this.endDate = endDate;
     }
 
-    public List<Deliverable> getDeliverables() {
-        return deliverables;
+
+    public Dimension getDimension() {
+        return dimension;
     }
 
-    public void setDeliverables(List<Deliverable> deliverables) {
-        this.deliverables = deliverables;
-    }
-
-    @Override
-    public String toString() {
-        return "RelocationRequest{" +
-                "addressArrival=" + addressArrival +
-                ", addressDeparture=" + addressDeparture +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", deliverables=" + deliverables +
-                '}';
+    public void setDimension(Dimension dimension) {
+        this.dimension = dimension;
     }
 }

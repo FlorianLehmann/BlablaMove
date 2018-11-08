@@ -25,7 +25,7 @@ public class DeclareRouteRESTImpl implements DeclareRouteREST {
 
             registryModifier.addRoute(routeDeclaration.getDate(),
                     routeDeclaration.getWaypoints(),
-                    routeDeclaration.getVolume(),
+                    routeDeclaration.getDimension(),
                     new User("toto"));
 
         } catch (IOException e) {

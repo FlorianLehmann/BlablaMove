@@ -1,9 +1,14 @@
 package fr.unice.model;
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 public class Route {
@@ -16,16 +21,18 @@ public class Route {
 
     @ElementCollection(fetch = FetchType.EAGER)
     private Collection<Waypoint> waypoints = new ArrayList<>();
-    private Volume volume;
+    private Dimension dimension;
 
     private User user;
 
-    public Route(Date date, Collection<Waypoint> waypoints, Volume volume, User user) {
+
+    public Route(Date date, Collection<Waypoint> waypoints, Dimension dimension, User user) {
         this.date = date;
         this.waypoints = waypoints;
-        this.volume = volume;
+        this.dimension = dimension;
         this.user = user;
     }
+
 
     public Route() {
     }
@@ -46,12 +53,12 @@ public class Route {
         this.waypoints = waypoints;
     }
 
-    public Volume getVolume() {
-        return volume;
+    public Dimension getDimension() {
+        return dimension;
     }
 
-    public void setVolume(Volume volume) {
-        this.volume = volume;
+    public void setDimension(Dimension dimension) {
+        this.dimension = dimension;
     }
 
     public User getUser() {
@@ -61,5 +68,7 @@ public class Route {
     public void setUser(User user) {
         this.user = user;
     }
+
+
 
 }
