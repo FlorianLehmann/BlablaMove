@@ -37,4 +37,8 @@ def upload_file():
 
 def estimate_volume(image1, image2):
     width, height, depth = EstimateVolume(image1, image2).estimate()
-    return {"width": width, "height": height, "depth": depth, "volume": width * height * depth}
+    return {"width": width, "height": height, "depth": depth, "volume": width * height * depth, "unit": "cm"}
+
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0')
