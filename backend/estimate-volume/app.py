@@ -24,14 +24,12 @@ def upload_file():
     if request.method == 'POST':
         if 'image1' not in request.files or 'image2' not in request.files:
             flash('One image is missing')
-            return redirect(request.url)
+            return jsonify(error="One image is missing. Be sure to send the 'image1' and 'image2'"), 400
         image1 = request.files['image1']
         image2 = request.files['image2']
-        if image1.filename == '' or image1.filename == '':
-            flash('No selected image')
-            return redirect(request.url)
         if image1 and allowed_file(image1.filename) and image2 and allowed_file(image2.filename):
             return jsonify(estimation=estimate_volume(image1, image2))
+        return jsonify(error="Image does not have valid filename"), 400
     return render_template("index.html")
 
 

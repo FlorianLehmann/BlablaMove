@@ -23,9 +23,7 @@ class EstimateVolume:
     def estimate(self):
         a, b = self._estimate_dimensions(self.image1)
         c, d = self._estimate_dimensions(self.image2)
-        if abs(a - c) < abs(a - d) and abs(a - c) < abs(b - d):
-            return a, b, d
-        if abs(b - c) < abs(b - d) and abs(b - c) < abs(a - d):
+        if (abs(a - c) < abs(a - d) and abs(a - c) < abs(b - d)) or (abs(b - c) < abs(b - d) and abs(b - c) < abs(a - d)):
             return a, b, d
         return a, b, c
 
