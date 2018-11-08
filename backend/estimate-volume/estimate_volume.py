@@ -6,7 +6,7 @@ from PIL import Image
 
 
 class EstimateVolume:
-    COIN = 2.4
+    COIN = 2.3
     MAX_SIZE = 500
 
     def __init__(self, image1, image2):
@@ -22,9 +22,15 @@ class EstimateVolume:
 
     def estimate(self):
         a, b = self._estimate_dimensions(self.image1)
+        if a < b:
+            a, b = b, a
         c, d = self._estimate_dimensions(self.image2)
         if (abs(a - c) < abs(a - d) and abs(a - c) < abs(b - d)) or (abs(b - c) < abs(b - d) and abs(b - c) < abs(a - d)):
+            if b < d:
+                b, d = d, b
             return a, b, d
+        if b < c:
+            b, c = c, b
         return a, b, c
 
     def _estimate_dimensions(self, image):
