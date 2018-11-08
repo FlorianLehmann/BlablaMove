@@ -73,12 +73,11 @@ public class RouteRelocationRegisterTest {
 
         Address addressDeparture = new Address("06410", "930 Route des Colles", "Biot");
         Address addressArrival = new Address("13009", "163 Avenue de Luminy", "Marseille");
-        List<Deliverable> deliverables = new ArrayList<>();
         User user = new User("Florian");
         Date startDate = new Date(11, 11, 2018);
         Date endDate = new Date(11, 11, 2018);
 
-        registryModifier.addRelocation(addressArrival, addressDeparture, startDate, endDate, deliverables, user);
+        registryModifier.addRelocation(addressArrival, addressDeparture, startDate, endDate, new Dimension(), user);
 
         List<Relocation> storedRelocations = findRelocations();
 
@@ -92,12 +91,11 @@ public class RouteRelocationRegisterTest {
 
         Address addressDeparture = new Address("06410", "930 Route des Colles", "Biot");
         Address addressArrival = new Address("13009", "163 Avenue de Luminy", "Marseille");
-        List<Deliverable> deliverables = new ArrayList<>();
         User user = new User("Florian");
         Date startDate = new Date(11, 11, 2018);
         Date endDate = new Date(11, 11, 2018);
 
-        registryModifier.addRelocation(addressArrival, addressDeparture, startDate, endDate, deliverables, user);
+        registryModifier.addRelocation(addressArrival, addressDeparture, startDate, endDate, new Dimension(), user);
 
         List<Relocation> storedRelocations = tracker.getRelocations(user);
 

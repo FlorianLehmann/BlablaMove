@@ -3,19 +3,23 @@ package fr.unice.model;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Volume {
+public class Dimension {
 
     private int height;
     private int width;
     private int depth;
 
-    public Volume(int height, int width, int depth) {
+    public Dimension(int height, int width, int depth) {
         this.height = height;
         this.width = width;
         this.depth = depth;
     }
 
-    public Volume() {
+    public Dimension() {
+    }
+
+    public int getVolume() {
+        return  height*width*depth;
     }
 
     public int getHeight() {

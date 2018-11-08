@@ -33,7 +33,7 @@ public class RequestRelocationRESTImpl implements RequestRelocationREST {
                     relocationRequest.getAddressDeparture(),
                     relocationRequest.getStartDate(),
                     relocationRequest.getEndDate(),
-                    relocationRequest.getDeliverables(),
+                    relocationRequest.getDimension(),
                     new User("toto"));
 
         } catch (IOException e) {

@@ -1,7 +1,12 @@
 package fr.unice.model;
 
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
-import java.util.List;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 public class Relocation {
@@ -40,21 +45,33 @@ public class Relocation {
             @AttributeOverride(name="year", column = @Column(name = "end_year"))
     })
     private Date endDate;
-    private List<Deliverable> deliverables;
+    private Dimension dimension;
+
+    @OneToOne
+    @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+    private Route route;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
-    public Relocation(Address addressArrival, Address addressDeparture, Date startDate, Date endDate, List<Deliverable> deliverables, User user) {
+    public Relocation(Address addressArrival, Address addressDeparture, Date startDate, Date endDate, Dimension dimension, User user) {
         this.addressArrival = addressArrival;
         this.addressDeparture = addressDeparture;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.deliverables = deliverables;
+        this.dimension = dimension;
         this.user = user;
     }
 
     public Relocation() {
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
     }
 
     public Address getAddressArrival() {
@@ -73,8 +90,8 @@ public class Relocation {
         return endDate;
     }
 
-    public List<Deliverable> getDeliverables() {
-        return deliverables;
+    public Dimension getDimension() {
+        return dimension;
     }
 
     public User getUser() {
@@ -101,8 +118,8 @@ public class Relocation {
         this.endDate = endDate;
     }
 
-    public void setDeliverables(List<Deliverable> deliverables) {
-        this.deliverables = deliverables;
+    public void setDeliverables(Dimension dimension) {
+        this.dimension = dimension;
     }
 
     public void setUser(User user) {

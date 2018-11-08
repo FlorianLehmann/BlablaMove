@@ -1,7 +1,7 @@
 package fr.unice.request;
 
 import fr.unice.model.Date;
-import fr.unice.model.Volume;
+import fr.unice.model.Dimension;
 import fr.unice.model.Waypoint;
 
 import java.util.List;
@@ -10,12 +10,12 @@ public class RouteDeclaration {
 
     private Date date;
     private List<Waypoint> waypoints;
-    private Volume volume;
+    private Dimension dimension;
 
-    public RouteDeclaration(Date date, List<Waypoint> waypoints, Volume volume) {
+    public RouteDeclaration(Date date, List<Waypoint> waypoints, Dimension dimension) {
         this.date = date;
         this.waypoints = waypoints;
-        this.volume = volume;
+        this.dimension = dimension;
     }
 
     public RouteDeclaration() {
@@ -37,11 +37,11 @@ public class RouteDeclaration {
         this.waypoints = waypoints;
     }
 
-    public Volume getVolume() {
-        return volume;
+    public Dimension getDimension() {
+        return dimension;
     }
 
-    public void setVolume(Volume volume) {
-        this.volume = volume;
+    public void setDimension(Dimension dimension) {
+        this.dimension = dimension;
     }
 }
