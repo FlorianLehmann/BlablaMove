@@ -43,7 +43,7 @@ public class RelocationFragment extends AbstractReservationFragment {
 
         CalendarView view = rootView.findViewById(R.id.arrival_date);
 
-        view.setOnDateChangeListener((view1, year, month, day) -> this.arrivalCalendar = new GregorianCalendar( year, month, day));
+        view.setOnDateChangeListener((view1, year, month, day) -> this.arrivalCalendar = new GregorianCalendar(year, month, day));
     }
 
     @Override

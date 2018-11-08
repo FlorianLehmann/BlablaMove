@@ -10,4 +10,9 @@
     <string name="arrival">Arrival</string>
     <string name="departure">Departure</string>
     <string name="submit_proposal_request">Submit proposal request</string>
+    <string name="title_relocation">Relocation</string>
+    <string name="title_estimate">Estimate</string>
+    <string name="title_proposal">Travel</string>
+    <string name="title_proposal_list">Route List</string>
+    <string name="title_relocation_list">Relocation List</string>
 </resources>

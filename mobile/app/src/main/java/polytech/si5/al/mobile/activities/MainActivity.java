@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import polytech.si5.al.mobile.R;
 import polytech.si5.al.mobile.fragments.DepatureFragment;
+import polytech.si5.al.mobile.fragments.ListRelocationFragment;
 import polytech.si5.al.mobile.fragments.PictureFragment;
 import polytech.si5.al.mobile.fragments.RelocationFragment;
 
@@ -27,8 +28,19 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.navigation_notifications:
                 loadDepartureFragment();
                 return true;
+            case R.id.navigation_list_relocation:
+                loadListRelocationFragment();
+                return true;
+            default:
+                return false;
         }
-        return false;
+    }
+
+    private void loadListRelocationFragment(){
+        ListRelocationFragment depatureFragment = ListRelocationFragment.newInstance();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, depatureFragment);
+        fragmentTransaction.commit();
     }
 
     private void loadDepartureFragment() {
