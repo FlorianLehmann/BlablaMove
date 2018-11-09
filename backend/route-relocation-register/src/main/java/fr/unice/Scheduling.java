@@ -21,7 +21,6 @@ public class Scheduling {
     private Scheduler scheduler;
 
     public Scheduling() {
-        System.out.println("HERE");
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -31,7 +30,6 @@ public class Scheduling {
     }
 
     public void scheduleDeliveries() {
-        System.out.println("HERE");
         scheduler.schedule(finder.getUnassignedRoute(), finder.getUnassignedRelocation());
     }
 

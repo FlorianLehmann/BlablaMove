@@ -19,9 +19,8 @@ public class RouteRelocationRegister implements RegistryModifier, Tracker, Finde
     @PersistenceContext
     private EntityManager entityManager;
 
-    @EJB
-    private Scheduler scheduler;
-
+    public RouteRelocationRegister() {
+    }
 
     @Override
     public void addRelocation(Address addressArrival, Address addressDeparture, Date startDate, Date endDate, Dimension dimension, User user) {
@@ -90,9 +89,10 @@ public class RouteRelocationRegister implements RegistryModifier, Tracker, Finde
 
         List<Route> routes = new ArrayList<>();
         for (Route route : query.getResultList()) {
-
+            if (!route.isAssigned())
+                routes.add(route);
         }
 
-        return new ArrayList<>();
+        return routes;
     }
 }
