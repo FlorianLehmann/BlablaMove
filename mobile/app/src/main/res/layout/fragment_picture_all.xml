@@ -19,5 +19,11 @@
         android:layout_height="wrap_content"
         android:text="@string/estimate_the_volume" />
 
+    <TextView
+        android:id="@+id/textVolumeEstimation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""/>
+
 
 </LinearLayout>

@@ -38,7 +38,6 @@ class EstimateVolume:
         blur = cv2.GaussianBlur(gray, (7, 7), 0)
         edges = self._find_edges(blur)
         contours = self._find_contours(edges)
-        result = image.copy()
         cm_per_pixel = None
         for contour in contours:
             if cv2.contourArea(contour) < 100:
@@ -46,7 +45,6 @@ class EstimateVolume:
             box = cv2.minAreaRect(contour)
             box = cv2.boxPoints(box)
             box = np.array(box, dtype="int")
-            cv2.drawContours(result, [box.astype("int")], -1, (0, 255, 0), 2)
             width, height = self._dimension(box)
             if cm_per_pixel is None:
                 cm_per_pixel = (width + height) / 2 / self.COIN
@@ -62,10 +60,6 @@ class EstimateVolume:
     def _find_contours(self, image):
         _, contours, *_ = cv2.findContours(image.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         return sorted(contours, key = cv2.contourArea)
-
-    def _show_image(self, image):
-        while cv2.waitKey(10) != 27:
-            cv2.imshow("Preview", image)
 
     def _dimension(self, box):
         a, b, c, d = box

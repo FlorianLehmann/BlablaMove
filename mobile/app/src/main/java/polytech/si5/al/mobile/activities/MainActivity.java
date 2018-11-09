@@ -8,10 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import polytech.si5.al.mobile.R;
-import polytech.si5.al.mobile.fragments.DepatureFragment;
-import polytech.si5.al.mobile.fragments.ListRelocationFragment;
-import polytech.si5.al.mobile.fragments.PictureFragment;
-import polytech.si5.al.mobile.fragments.RelocationFragment;
+import polytech.si5.al.mobile.fragments.FragmentSettings;
+import polytech.si5.al.mobile.fragments.fragmentsend.DepatureFragment;
+import polytech.si5.al.mobile.fragments.fragmentseek.ListRelocationFragment;
+import polytech.si5.al.mobile.fragments.fragmentseek.ListTravelFragment;
+import polytech.si5.al.mobile.fragments.fragmentsend.PictureFragment;
+import polytech.si5.al.mobile.fragments.fragmentsend.RelocationFragment;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -31,9 +33,26 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.navigation_list_relocation:
                 loadListRelocationFragment();
                 return true;
+            case R.id.navigation_list_travel:
+                loadListTravelFragment();
+                return true;
             default:
                 return false;
         }
+    }
+
+    private void loadSettingsFragment() {
+        FragmentSettings fragmentSettings = FragmentSettings.newInstance();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragmentSettings);
+        fragmentTransaction.commit();
+    }
+
+    private void loadListTravelFragment() {
+        ListTravelFragment listTravelFragment = ListTravelFragment.newInstance();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, listTravelFragment);
+        fragmentTransaction.commit();
     }
 
     private void loadListRelocationFragment(){
@@ -69,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.loadRelocationFragment();
+        this.loadEstimateFragment();
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
