@@ -97,7 +97,7 @@ public class PictureFragment extends Fragment implements CallableFragment {
 
     @Override
     public void callbackSetter(String rawResult) {
-        this.volumeText.setText("Volume : " + new JSONHelper().getVolumeFromRequest(rawResult));
+        this.volumeText.setText(new JSONHelper().getVolumeFromRequest(rawResult));
         System.out.println(rawResult);
     }
 }

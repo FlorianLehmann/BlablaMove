@@ -143,7 +143,9 @@ public class JSONHelper {
         try {
             JSONObject request = ((JSONObject) new JSONTokener(rawResult).nextValue()).getJSONObject("estimation");
 
-            return request.getString("volume") + " " + request.getString("unit") + "3";
+            return "\n depth : " + request.getString("depth") + " " + request.getString("unit") + "\n"
+                    + "height : " + request.getString("height") + " " + request.getString("unit") + "\n"
+                    + "width : " + request.getString("width") + " " + request.getString("unit") + "\n";
         } catch (JSONException e) {
             return "Couldn't retrieve the volume";
         }
