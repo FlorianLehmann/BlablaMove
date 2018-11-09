@@ -24,7 +24,6 @@ public class Schedule implements Scheduler {
 
     @Override
     public void schedule(List<Route> routes, List<Relocation> relocations) {
-        System.out.println("HERE");
         for (Relocation relocation : relocations) {
             for (Route route : routes) {
 
@@ -33,6 +32,7 @@ public class Schedule implements Scheduler {
                 route = entityManager.merge(route);
                 if ( route.getDimension().getVolume() >= relocation.getDimension().getVolume() ){
                     relocation.setRoute(route);
+                    route.setAssigned(true);
                     entityManager.merge(relocation);
                     entityManager.merge(route);
                 }

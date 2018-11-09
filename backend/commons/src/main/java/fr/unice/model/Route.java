@@ -24,6 +24,7 @@ public class Route {
     private Dimension dimension;
 
     private User user;
+    private boolean isAssigned;
 
 
     public Route(Date date, Collection<Waypoint> waypoints, Dimension dimension, User user) {
@@ -31,10 +32,19 @@ public class Route {
         this.waypoints = waypoints;
         this.dimension = dimension;
         this.user = user;
+        this.isAssigned = false;
     }
 
 
     public Route() {
+    }
+
+    public boolean isAssigned() {
+        return isAssigned;
+    }
+
+    public void setAssigned(boolean assigned) {
+        isAssigned = assigned;
     }
 
     public Date getDate() {
