@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">BlablaMove</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="estimate_the_volume">Estimate the volume</string>
+    <string name="title_picture">Take a picture</string>
+    <string name="submit_relocation_request">Submit relocation</string>
+    <string name="space_available">Space available</string>
+    <string name="arrival">Arrival</string>
+    <string name="departure">Departure</string>
+    <string name="submit_proposal_request">Submit proposal request</string>
+    <string name="title_relocation">Relocation</string>
+    <string name="title_estimate">Estimate</string>
+    <string name="title_proposal">Travel</string>
+    <string name="title_proposal_list">Route List</string>
+    <string name="title_relocation_list">Relocation List</string>
+    <string name="save_base_server">Sauvegarder adresse serveur</string>
+    <string name="save_estimation_server">Sauvegarder adresse estimation</string>
+    <string name="serverBase">Adresse serveur</string>
+    <string name="serverEstimation">Adresse estimation</string>
+    <string name="title_settings">Parametres</string>
+</resources>
