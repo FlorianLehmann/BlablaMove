@@ -1,3 +1,13 @@
+# Semaine 04 ![Orange flag](../docs/images/flags/orange.svg)
+
+## Travail réalisé
+
+Durant la semaine 04, nous avons principalement théorisé sur des POCs et des techniques pour mettre en place le support de la vidéo pour l'estimation du volume. Nous avons également préparé l'application pour supporter l'enregistrement vidéo afin de prévoir cette partie d'upload vers notre service de traitement de l'image. Nous nous sommes enfin interessé a la mise en place de l'intégration continue de facon plus poussée
+
+## Travail prévu
+
+Pour la prochaine iteration, nous avons prévu de mettre en place une premiere stratégie d'analyse basique, consistant a découper la vidéo toute les X secondes afin d'en extraire une image qui sera ensuite analysée par Microsoft Azure. Les résultats une fois obtenus seront regroupés et envoyé sur l'interface de l'utilisateur afin d'avoir cette premiere chaine complete validant notre nouveau scénario
+
 # Semaine 42 ![Red flag](../docs/images/flags/red.svg)
 
 ## Travail réalisé
