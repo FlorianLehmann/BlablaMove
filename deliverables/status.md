@@ -1,3 +1,14 @@
+# Semaine 05 ![Orange flag](../docs/images/flags/orange.svg)
+
+## Travail réalisé
+
+Durant la semaine 05, il a été décidé d'arreter les frais sur les POCs de la partie estimation via la vidéo. L'architecture étant définie, nous avons mis l'accent sur la réalisation de plusieurs parties de cette derniere. L'application est prete a enregistrer la vidéo et a l'envoyer a un service externe de traitement ad-hoc. La partie integration reste un point sensible du projet.
+
+## Travail prévu
+
+Pour la prochaine iteration, nous avons prévu de créer ce service externe qui nous manque dans l'architecture avec une méthode de traitement et d'estimation basique mais qui permet d'avoir un scénario jouable intégralement et qui non seulement ne casse pas les précédents, mais vient completer les objectifs de notre extension. L'accent va également etre mis sur l'intégration afin d'avoir un pipeline complet, sur lequel viendra s'ajouter un déploiement automatisable (Docker ?) 
+
+
 # Semaine 04 ![Orange flag](../docs/images/flags/orange.svg)
 
 ## Travail réalisé
