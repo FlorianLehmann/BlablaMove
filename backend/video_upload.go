@@ -1,12 +1,15 @@
-package video_upload
+package main
 
 import (
+	"io"
 	"log"
 	"net/http"
+	"os"
+	"os/exec"
 	"time"
 )
 
-func handleRequests()  {
+func handleRequests() {
 	srv := &http.Server{
 		Addr:         ":8080",
 		ReadTimeout:  5 * time.Second,
@@ -20,19 +23,29 @@ func handleRequests()  {
 
 func videoUpload(writer http.ResponseWriter, request *http.Request) {
 
-	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	writer.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
-	if request.Method==http.MethodPost {
+	if request.Method == http.MethodPost {
 		file, _, err := request.FormFile("video")
-		defer file.Close()
 
 		if err != nil {
 			log.Fatal(err)
 		}
+		defer file.Close()
 
-		estimate(file)
+		// how to create uuid
+		out, err := exec.Command("uuidgen").Output()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		uuid := string(out)
+		f, err := os.OpenFile("/tmp/"+uuid, os.O_WRONLY|os.O_CREATE, 0777)
+		defer f.Close()
+		io.Copy(f, file)
+
+		//estimate(uuid)
 
 	} else {
 		http.Error(writer, "Bad method request", 400)
