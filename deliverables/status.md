@@ -1,3 +1,14 @@
+# Semaine 06 ![Orange flag](../docs/images/flags/orange.svg)
+
+## Travail réalisé
+
+Durant la semaine 06, nous avons pu mettre en place la quasi-totalité de notre chaine, afin d'avoir notre nouveau scénario de bout en bout. Cependant, il n'est toujours pas possible de le dérouler en intégralité, il manque la mise en place de la découpe de la vidéo, chainon manquant de notre extension.
+
+## Travail prévu
+
+Pour la prochaine iteration, nous allons nous attarder sur la partie de découpe vidéo. Il sera alors possible de dérouler un scénario primaire a travers toutes les couches de notre architecture. Il faudra terminer par conteneuriser notre architecture afin de renforcer notre pipeline d'intégration
+
+
 # Semaine 05 ![Orange flag](../docs/images/flags/orange.svg)
 
 ## Travail réalisé
