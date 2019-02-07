@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <group android:checkableBehavior="single">
+        <item
+            android:title="@string/show_lists">
+            <menu>
+                <item
+                    android:icon="@drawable/ic_announcement_black_24dp"
+                    android:id="@+id/nav_announce_relocation"
+                    android:title="@string/title_relocation_menu"/>
+
+                <item
+                    android:icon="@drawable/ic_departure_black_24dp"
+                    android:id="@+id/nav_announce_departure"
+                    android:title="@string/title_departure_menu" />
+            </menu>
+        </item>
+        <item
+            android:title="@string/title_proposal">
+            <menu>
+                <item
+                    android:icon="@drawable/ic_relocation_black_24dp"
+                    android:id="@+id/nav_proposal_relocation"
+                    android:title="@string/title_prop_relocation_menu"/>
+
+                <item
+                    android:icon="@drawable/ic_departure_add_black_24dp"
+                    android:id="@+id/nav_proposal_departure"
+                    android:title="@string/title_prop_departure_menu" />
+            </menu>
+        </item>
+        <item
+            android:title="@string/title_estimate">
+            <menu>
+                <item
+                    android:icon="@drawable/ic_linked_camera_black_24dp"
+                    android:id="@+id/nav_estimate_picture"
+                    android:title="@string/title_picture_menu" />
+
+                <item
+                    android:icon="@drawable/ic_camera_black_24dp"
+                    android:id="@+id/nav_estimate_camera"
+                    android:title="@string/title_camera_menu" />
+            </menu>
+        </item>
+        <item
+            android:title="@string/title_settings">
+            <menu>
+                <item
+                    android:id="@+id/nav_settings"
+                    android:icon="@drawable/ic_settings_black_24dp"
+                    android:title="@string/title_settings" />
+            </menu>
+        </item>
+    </group>
+</menu>
