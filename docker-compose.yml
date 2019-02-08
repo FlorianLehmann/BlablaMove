@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+  postgresql:
+    image: postgres:11.1
+    container_name: postgresql
+    restart: always
+    environment:
+      POSTGRES_USER: florian
+      POSTGRES_PASSWORD: IbkS=&S$-
+      POSTGRES_DB: survey
+
+  backend-java:
+    build: ./backend/server
+    container_name: backend-java 
