@@ -10,3 +10,4 @@ name: default
     - feature/development
     event:
     - push
+
