@@ -1,12 +1,7 @@
-kind: pipeline
-name: default
-
-- name: integration
-  image: maven:3.6.0-jdk-8-alpine
-  commands:
-  - mvn test
-  when:
-    branch:
-    - feature/development
-    event:
-    - push
+pipeline:
+  test-maven:
+    image: maven:3.6.0-jdk-8-alpine
+    commands: mvn test
+    when:
+      branch: feature/development
+      event: push
