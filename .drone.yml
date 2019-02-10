@@ -7,3 +7,11 @@ pipeline:
     when:
       branch: feature/development
       event: push
+
+  notify-devs:
+    image: plugins/slack
+    settings:
+      webhook:
+        from_secret: slack_webhook
+      channel: dev
+      username: drone
