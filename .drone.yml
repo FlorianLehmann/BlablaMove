@@ -13,5 +13,5 @@ pipeline:
     settings:
       webhook:
         from_secret: slack_webhook
-      channel: dev
+      channel: al_projet
       username: drone
