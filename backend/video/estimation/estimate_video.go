@@ -23,7 +23,7 @@ func Estimate(uuid string) {
 		}
 		video.Read(&img)
 
-		// call azure api
+		Azure(img.ToBytes(), "password")
 
 	}
 
