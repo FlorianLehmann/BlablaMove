@@ -2,6 +2,7 @@ package estimation
 
 import (
 	"log"
+	"os/exec"
 
 	"gocv.io/x/gocv"
 )
@@ -23,7 +24,17 @@ func Estimate(uuid string) {
 		}
 		video.Read(&img)
 
-		Azure(img.ToBytes(), "password")
+		out, err := exec.Command("uuidgen").Output()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		uuid := string(out)
+		var params []int
+		params = append(params, gocv.IMWritePngCompression)
+		filepath := "/tmp/" + uuid + ".png"
+		gocv.IMWriteWithParams(filepath, img, params)
+		Azure(filepath, "my-password")
 
 	}
 

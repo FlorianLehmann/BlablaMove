@@ -11,13 +11,17 @@ import (
 	"time"
 )
 
-func Azure(image []byte, subscriptionKey string) {
+func Azure(filepath string, subscriptionKey string) {
+	image, err := ioutil.ReadFile(filepath)
+	if err != nil {
+		panic(err)
+	}
 	const uriBase = "https://westeurope.api.cognitive.microsoft.com/vision/v2.0/analyze"
 	const params = "?visualFeatures=Objects,Description&details=Landmarks&language=en"
 	const uri = uriBase + params
 
 	client := &http.Client{
-		Timeout: time.Second * 2,
+		Timeout: time.Second * 10,
 	}
 	stream := bytes.NewBuffer(image)
 
