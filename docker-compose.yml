@@ -8,8 +8,12 @@ services:
     restart: always
     environment:
       POSTGRES_USER: florian
-      POSTGRES_PASSWORD: IbkS=&S$-
+      POSTGRES_PASSWORD: IbkS=&S
       POSTGRES_DB: survey
+    ports:
+    - "5432:5432"
+    volumes:
+    - ./backend/video/database/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   backend-java:
     build: ./backend/server
