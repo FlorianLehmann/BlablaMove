@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_USER: florian
       POSTGRES_PASSWORD: IbkS=&S
-      POSTGRES_DB: survey
+      POSTGRES_DB: volume
     ports:
     - "5432:5432"
     volumes:
