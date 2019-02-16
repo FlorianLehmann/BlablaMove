@@ -3,15 +3,39 @@ package estimation
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
+	"log"
 
 	"net/http"
 
 	"time"
 )
 
-func Azure(filepath string, subscriptionKey string) {
+type AzureAnswer struct {
+	Categories []struct {
+		Name   string  `json:"name"`
+		Score  float64 `json:"score"`
+		Detail struct {
+			Landmarks []interface{} `json:"landmarks"`
+		} `json:"detail"`
+	} `json:"categories"`
+	Description struct {
+		Tags     []string `json:"tags"`
+		Captions []struct {
+			Text       string  `json:"text"`
+			Confidence float64 `json:"confidence"`
+		} `json:"captions"`
+	} `json:"description"`
+	Objects   []interface{} `json:"objects"`
+	RequestID string        `json:"requestId"`
+	Metadata  struct {
+		Width  int    `json:"width"`
+		Height int    `json:"height"`
+		Format string `json:"format"`
+	} `json:"metadata"`
+}
+
+func Azure(filepath string, subscriptionKey string) []string {
 	image, err := ioutil.ReadFile(filepath)
 	if err != nil {
 		panic(err)
@@ -47,10 +71,11 @@ func Azure(filepath string, subscriptionKey string) {
 	}
 
 	// Parse the JSON data from the byte array
-	var f interface{}
-	json.Unmarshal(data, &f)
+	var ans AzureAnswer
+	err = json.Unmarshal(data, &ans)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	// Format and display the JSON result
-	jsonFormatted, _ := json.MarshalIndent(f, "", "  ")
-	fmt.Println(string(jsonFormatted))
+	return ans.Description.Tags
 }

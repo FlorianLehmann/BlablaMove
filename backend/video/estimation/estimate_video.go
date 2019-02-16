@@ -5,9 +5,11 @@ import (
 	"os/exec"
 
 	"gocv.io/x/gocv"
+
+	"../database"
 )
 
-func Estimate(uuid string) {
+func Estimate(uuid string) int {
 
 	img := gocv.NewMat()
 
@@ -16,6 +18,8 @@ func Estimate(uuid string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	var volume int
 
 	for {
 		if !video.IsOpened() {
@@ -34,8 +38,15 @@ func Estimate(uuid string) {
 		params = append(params, gocv.IMWritePngCompression)
 		filepath := "/tmp/" + uuid + ".png"
 		gocv.IMWriteWithParams(filepath, img, params)
-		Azure(filepath, "my-password")
+		listObjects := Azure(filepath, "my-password")
 
+		for _, object := range listObjects {
+			if database.HasObject(object) {
+				volume += (database.GetObject(object).Width * database.GetObject(object).Height * database.GetObject(object).Depth)
+			}
+		}
 	}
+
+	return volume
 
 }
