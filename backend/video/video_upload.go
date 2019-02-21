@@ -7,6 +7,8 @@ import (
 	"os"
 	"os/exec"
 	"time"
+
+	"./estimation"
 )
 
 func handleRequests() {
@@ -45,7 +47,7 @@ func videoUpload(writer http.ResponseWriter, request *http.Request) {
 		defer f.Close()
 		io.Copy(f, file)
 
-		//estimate(uuid)
+		estimation.Estimate(uuid)
 
 	} else {
 		http.Error(writer, "Bad method request", 400)
