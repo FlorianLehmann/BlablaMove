@@ -13,7 +13,8 @@ steps:
 
 - name: test-integration-go
   image: golang:latest
-  commands: 
+  commands:
+    - got get github.com/google/go-cmp/cmp
     - cd backend/integration
     - go test
   when:
