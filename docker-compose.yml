@@ -17,4 +17,6 @@ services:
 
   backend-java:
     build: ./backend/server
-    container_name: backend-java 
+    container_name: backend-java
+    ports:
+    - "8080:8080"
