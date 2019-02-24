@@ -11,7 +11,7 @@
     <string name="departure">Departure</string>
     <string name="submit_proposal_request">Submit proposal request</string>
     <string name="title_relocation">Relocation</string>
-    <string name="title_estimate">Estimate</string>
+    <string name="title_estimate">Estimer</string>
     <string name="title_proposal">Travel</string>
     <string name="title_proposal_list">Route List</string>
     <string name="title_relocation_list">Relocation List</string>
@@ -20,4 +20,20 @@
     <string name="serverBase">Adresse serveur</string>
     <string name="serverEstimation">Adresse estimation</string>
     <string name="title_settings">Parametres</string>
+    <string name="show_lists">Announces</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_relocation_menu">Relocation</string>
+    <string name="title_departure_menu">Departure</string>
+    <string name="title_proposal_menu">Proposal</string>
+    <string name="title_prop_relocation_menu">Request a relocation</string>
+    <string name="title_prop_departure_menu">Propose a departure</string>
+    <string name="title_camera_menu">Estimate from camera</string>
+    <string name="title_picture_menu">Estimate from picture</string>
+    <string name="title_capture">Capture a video</string>
 </resources>

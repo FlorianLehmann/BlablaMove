@@ -38,7 +38,7 @@ public class FragmentSettings extends Fragment {
         EditText textEstimation = rootView.findViewById(R.id.serverEstimation);
 
         textBase.setText(CsteStringApp.SERVER_BASE_ADDRESS);
-        textEstimation.setText(CsteStringApp.SERVER_BASE_ADDRESS);
+        textEstimation.setText(CsteStringApp.SERVER_ESTIMATE_ADDRESS);
 
         Button buttonBase = rootView.findViewById(R.id.server_base_save);
         Button buttonEstimation = rootView.findViewById(R.id.server_estimation_save);
@@ -49,6 +49,11 @@ public class FragmentSettings extends Fragment {
             }
         });
 
+        buttonEstimation.setOnClickListener((view) -> {
+            if(!extractText(textEstimation).isEmpty()){
+                CsteStringApp.SERVER_ESTIMATE_ADDRESS = extractText(textEstimation);
+            }
+        });
 
         return rootView;
     }
