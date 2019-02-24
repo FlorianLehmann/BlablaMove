@@ -11,6 +11,15 @@ steps:
     branch: feature/development
     event: push
 
+- name: test-integration-go
+  image: golang:latest
+  commands: 
+    - cd backend/integration
+    - go test
+  when:
+    branch: feature/development
+    event: push
+
 - name: notify-devs
   image: plugins/slack
   settings:
