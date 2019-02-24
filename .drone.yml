@@ -34,3 +34,12 @@ steps:
       {{else}}
         build {{build.number}} failed. Fix me please.
       {{/success}}
+
+services:
+- name: server
+  image: docker
+  commands: 
+    - cd backend
+    - mvn clean package
+    - cd ..
+    - docker-compose up --build
