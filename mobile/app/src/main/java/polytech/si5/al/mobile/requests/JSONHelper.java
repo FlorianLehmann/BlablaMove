@@ -150,4 +150,14 @@ public class JSONHelper {
             return "Couldn't retrieve the volume";
         }
     }
+
+    public String getVolumeFromVideoRequest(String rawResult){
+        try {
+            JSONObject request = (JSONObject) new JSONTokener(rawResult).nextValue();
+
+            return "\n Total volume : " + request.getString("volume");
+        } catch (JSONException e) {
+            return "Couldn't retrieve the volume";
+        }
+    }
 }
