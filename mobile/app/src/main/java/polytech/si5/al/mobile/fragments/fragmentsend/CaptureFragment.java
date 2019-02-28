@@ -10,7 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import polytech.si5.al.mobile.R;
-import polytech.si5.al.mobile.fragments.fragmentseek.CallableFragment;
+import polytech.si5.al.mobile.fragments.CallableFragment;
+import polytech.si5.al.mobile.requests.AsyncTaskVideo;
 import polytech.si5.al.mobile.requests.JSONHelper;
 
 /**
@@ -56,14 +57,24 @@ public class CaptureFragment extends Fragment implements CallableFragment {
 
     private void setupEstimateButton(View rootView) {
         final Button button = rootView.findViewById(R.id.button_estimate);
+
+        button.setOnClickListener((view) -> {
+            if(this.isValidRequest()){
+                new AsyncTaskVideo(this).execute(this.singleCaptureFragment.getVideo());
+            } else {
+                button.setBackgroundColor(getResources().getColor(R.color.wrongParams));
+            }
+        });
     }
 
     private boolean isValidRequest() {
-        return true;
+        return this.singleCaptureFragment.containsVideo();
     }
 
     private void addVideoFragment() {
         SingleCaptureFragment singleCaptureFragment = SingleCaptureFragment.newInstance();
+
+        this.singleCaptureFragment = singleCaptureFragment;
 
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_capture, singleCaptureFragment);

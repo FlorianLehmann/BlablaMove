@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import polytech.si5.al.mobile.R;
 import polytech.si5.al.mobile.adapter.ListTravelAdapter;
+import polytech.si5.al.mobile.fragments.CallableFragment;
 import polytech.si5.al.mobile.requests.AsyncGatherHelper;
 import polytech.si5.al.mobile.requests.JSONHelper;
 

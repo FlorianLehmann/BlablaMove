@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import polytech.si5.al.mobile.R;
-import polytech.si5.al.mobile.fragments.fragmentseek.CallableFragment;
+import polytech.si5.al.mobile.fragments.CallableFragment;
 import polytech.si5.al.mobile.requests.AsyncTaskImage;
 import polytech.si5.al.mobile.requests.JSONHelper;
 

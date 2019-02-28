@@ -1,6 +1,5 @@
 package polytech.si5.al.mobile.requests;
 
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
 import org.apache.http.HttpEntity;
@@ -9,45 +8,53 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.ByteArrayBody;
+import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
-import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 
 import polytech.si5.al.mobile.CsteStringApp;
 import polytech.si5.al.mobile.fragments.CallableFragment;
 
-public class AsyncTaskImage extends AsyncTask<Bitmap, Void, String> {
+public class AsyncTaskVideo extends AsyncTask<String, Void, String> {
 
     private CallableFragment fragment;
 
-    public AsyncTaskImage(CallableFragment fragment){
+    public AsyncTaskVideo (CallableFragment fragment){
         this.fragment = fragment;
     }
 
     @Override
-    protected String doInBackground(Bitmap... bitmaps) {
+    protected String doInBackground(String... strings) {
         HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httpPost = new HttpPost(CsteStringApp.SERVER_BASE_HTTP + CsteStringApp.SERVER_ESTIMATE_ADDRESS);
+        HttpPost httpPost = new HttpPost(CsteStringApp.SERVER_BASE_HTTP + CsteStringApp.SERVER_ESTIMATE_ADDRESS_VIDEO);
 
         String boundary = "-------------" + System.currentTimeMillis();
 
         httpPost.setHeader("Content-type", "multipart/form-data; boundary="+boundary);
 
-        ByteArrayBody bab = new ByteArrayBody(extractByteFromBitmat(bitmaps[0]), "pic.png");
-        ByteArrayBody bab2 = new ByteArrayBody(extractByteFromBitmat(bitmaps[1]), "pic2.png");
+        FileBody video = new FileBody(new File(strings[0]));
 
         HttpEntity entity = MultipartEntityBuilder.create()
                 .setMode(HttpMultipartMode.BROWSER_COMPATIBLE)
                 .setBoundary(boundary)
-                .addPart("image1", bab)
-                .addPart("image2", bab2)
+                .addPart("video", video)
                 .build();
 
         httpPost.setEntity(entity);
 
+        System.out.println("xdddd");
+        System.out.println("xdddd");
+        System.out.println("xdddd");
+        System.out.println("xdddd");
+        System.out.println("xdddd");
+
+        return sendRequest(httpclient, httpPost);
+    }
+
+    private String sendRequest(HttpClient httpclient, HttpPost httpPost) {
         try {
             HttpResponse response = httpclient.execute(httpPost);
 
@@ -59,13 +66,6 @@ public class AsyncTaskImage extends AsyncTask<Bitmap, Void, String> {
         }
 
         return "";
-    }
-
-    private byte[] extractByteFromBitmat(Bitmap bitmap) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-
-        return baos.toByteArray();
     }
 
     @Override

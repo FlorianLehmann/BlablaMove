@@ -11,7 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import polytech.si5.al.mobile.CsteStringApp;
-import polytech.si5.al.mobile.fragments.fragmentseek.CallableFragment;
+import polytech.si5.al.mobile.fragments.CallableFragment;
 
 public class AsyncGatherHelper extends AsyncTask<String, Void, String> {
 

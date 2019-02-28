@@ -1,4 +1,4 @@
-package polytech.si5.al.mobile.fragments.fragmentseek;
+package polytech.si5.al.mobile.fragments;
 
 public interface CallableFragment {
 
