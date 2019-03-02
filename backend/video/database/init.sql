@@ -7,3 +7,4 @@ CREATE TABLE objects (
 );
 
 INSERT INTO objects VALUES(0, 'chair', 47, 45, 70);
+INSERT INTO objects VALUES(0, 'desk', 100, 100, 100);

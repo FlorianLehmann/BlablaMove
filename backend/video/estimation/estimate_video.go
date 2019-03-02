@@ -9,7 +9,9 @@ import (
 	"../database"
 )
 
-func Estimate(uuid string) int {
+func Estimate(uuid string) float64 {
+
+	set := make(map[string]bool)
 
 	img := gocv.NewMat()
 
@@ -21,12 +23,19 @@ func Estimate(uuid string) int {
 
 	var volume int
 
+	database.ConnectionDatabase()
+
+	log.Println("Start video")
+
 	for {
 		if !video.IsOpened() {
 			video.Close()
 			break
 		}
-		video.Read(&img)
+		if !video.Read(&img) {
+			log.Println("End video")
+			return float64(volume) / 1000000.
+		}
 
 		out, err := exec.Command("uuidgen").Output()
 		if err != nil {
@@ -38,15 +47,25 @@ func Estimate(uuid string) int {
 		params = append(params, gocv.IMWritePngCompression)
 		filepath := "/tmp/" + uuid + ".png"
 		gocv.IMWriteWithParams(filepath, img, params)
-		listObjects := Azure(filepath, "my-password")
+
+		//var listObjects []string
+		//listObjects = append(listObjects, "chair")
+
+		listObjects := Azure(filepath, "API_KEYS")
+		log.Println(listObjects)
 
 		for _, object := range listObjects {
 			if database.HasObject(object) {
-				volume += (database.GetObject(object).Width * database.GetObject(object).Height * database.GetObject(object).Depth)
+				if !set[object] {
+					volume += (database.GetObject(object).Width * database.GetObject(object).Height * database.GetObject(object).Depth)
+				}
+				set[object] = true
 			}
 		}
+		log.Println(volume)
+		return float64(volume) / 1000000.
 	}
 
-	return volume
+	return 0.
 
 }

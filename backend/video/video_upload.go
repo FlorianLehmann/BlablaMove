@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"io"
 	"log"
 	"net/http"
@@ -11,11 +12,15 @@ import (
 	"./estimation"
 )
 
+type Response struct {
+	Volume float64 `json:"volume"`
+}
+
 func handleRequests() {
 	srv := &http.Server{
-		Addr:         ":8080",
-		ReadTimeout:  5 * time.Second,
-		WriteTimeout: 10 * time.Second,
+		Addr:         ":8081",
+		ReadTimeout:  100 * time.Second,
+		WriteTimeout: 100 * time.Second,
 	}
 
 	http.HandleFunc("/video_upload", videoUpload)
@@ -23,14 +28,12 @@ func handleRequests() {
 	log.Fatal(srv.ListenAndServe())
 }
 
-func videoUpload(writer http.ResponseWriter, request *http.Request) {
+func videoUpload(w http.ResponseWriter, request *http.Request) {
 
-	writer.Header().Set("Access-Control-Allow-Origin", "*")
-	writer.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-
+	log.Println("New connection")
 	if request.Method == http.MethodPost {
 		file, _, err := request.FormFile("video")
-
+		log.Println("Receive video")
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -43,14 +46,19 @@ func videoUpload(writer http.ResponseWriter, request *http.Request) {
 		}
 
 		uuid := string(out)
+		log.Println(uuid)
 		f, err := os.OpenFile("/tmp/"+uuid, os.O_WRONLY|os.O_CREATE, 0777)
 		defer f.Close()
 		io.Copy(f, file)
 
-		estimation.Estimate(uuid)
+		res := Response{estimation.Estimate(uuid)}
+		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+		json.NewEncoder(w).Encode(&res)
 
 	} else {
-		http.Error(writer, "Bad method request", 400)
+		http.Error(w, "Bad method request", 400)
 	}
 
 }
