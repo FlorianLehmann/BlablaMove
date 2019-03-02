@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>Estimate Volume</h1>
+<form method=post enctype=multipart/form-data>
+<span class="btn btn-default btn-file">
+    Image n°1: <input type="file" name="image1">
+</span>
+    <br>
+    <span class="btn btn-default btn-file">
+    Image n°2: <input type="file" name="image2">
+</span>
+    <br>
+    <input type=submit value=Upload>
+</form>
+{% endblock %}

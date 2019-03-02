@@ -1,0 +1,45 @@
+kind: pipeline
+name: default
+
+steps:
+- name: test-maven
+  image: maven:3.6.0-jdk-8-alpine
+  commands: 
+    - cd backend
+    - mvn test
+  when:
+    branch: feature/development
+    event: push
+
+- name: test-integration-go
+  image: golang:latest
+  commands:
+    - go get github.com/google/go-cmp/cmp
+    - cd backend/integration
+    - go test
+  when:
+    branch: feature/development
+    event: push
+
+- name: notify-devs
+  image: plugins/slack
+  settings:
+    webhook:
+      from_secret: slack_webhook
+    channel: al_projet
+    username: drone
+    template: >
+      {{#success build.status}}
+        build {{build.number}} succeeded. Good job.
+      {{else}}
+        build {{build.number}} failed. Fix me please.
+      {{/success}}
+
+services:
+- name: server
+  image: docker
+  commands: 
+    - cd backend
+    - mvn clean package
+    - cd ..
+    - docker-compose up --build
